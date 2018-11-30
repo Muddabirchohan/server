@@ -2,12 +2,123 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-router.get('/',(req,res,next)=>{
-    res.status(200).json({
-        message: "handling for products"
-    })
-});
+router.get('/getproducts',(req,res,next)=>{
+let i=0;
+    Product.find({}, function (err, users) {
+        var userMap = [];
+        users.forEach(function (user) {
+            userMap[i++] = user;
+        });
+        res.send(userMap);
+    });
+   
+})
 
+
+router.get('/webproducts',(req,res,next)=>{
+let i =0;
+    Product.find({}, function (err, users) {
+        var userMap = [];
+        users.forEach(function (user) {
+            if(user.category === "web"){
+                userMap[i++] = user
+            }
+        });
+        console.log(userMap);
+        res.send(userMap);
+    })
+    .catch(err => next(err));
+})
+
+
+router.get('/androidproducts',(req,res,next)=>{
+let i=0;
+    Product.find({}, function (err, users) {
+        var userMap = [];
+        users.forEach(function (user) {
+            if(user.category === "android"){
+                userMap[i++] = user
+            }
+        });
+        console.log(userMap);
+        res.send(userMap);
+    })
+    .catch(err => next(err));
+})
+
+router.get('/vrar',(req,res,next)=>{
+    let i=0;
+        Product.find({}, function (err, users) {
+            var userMap = [];
+            users.forEach(function (user) {
+                if(user.category === "vr" || user.category === "ar" ){
+                    userMap[i++] = user
+                }
+            });
+            console.log(userMap);
+            res.send(userMap);
+        })
+        .catch(err => next(err));
+    })
+
+    router.get('/ai',(req,res,next)=>{
+        let i=0;
+            Product.find({}, function (err, users) {
+                var userMap = [];
+                users.forEach(function (user) {
+                    if(user.category === "ai"){
+                        userMap[i++] = user
+                    }
+                });
+                console.log(userMap);
+                res.send(userMap);
+            })
+            .catch(err => next(err));
+        })
+
+        router.get('/ecommerce',(req,res,next)=>{
+            let i=0;
+                Product.find({}, function (err, users) {
+                    var userMap = [];
+                    users.forEach(function (user) {
+                        if(user.category === "ecommerce"){
+                            userMap[i++] = user
+                        }
+                    });
+                    console.log(userMap);
+                    res.send(userMap);
+                })
+                .catch(err => next(err));
+            })
+    
+        
+    
+    
+            router.get('/iot',(req,res,next)=>{
+                let i=0;
+                    Product.find({}, function (err, users) {
+                        var userMap = [];
+                        users.forEach(function (user) {
+                            if(user.category === "iot"){
+                                userMap[i++] = user
+                            }
+                        });
+                        console.log(userMap);
+                        res.send(userMap);
+                    })
+                    .catch(err => next(err));
+                })
+        
+
+router.get('/:id',(req,res,next)=>{
+
+    Product.findById(req.params.id)
+    .then( docs => {
+        if(!docs){ return res.status(404).end()}
+        return res.status(200).json(docs)
+    })
+    .catch(err => next(err));
+})
 
 router.post('/postproduct',(req,res,next)=>{
     let userObject = {
@@ -23,43 +134,34 @@ router.post('/postproduct',(req,res,next)=>{
         category: req.body.category
     }
     Product.create(userObject).then(function (user) {
-        
          console.log(user);
-        //  userObject.add(user._id);
-        //  console.log(userObject)
          res.send(user)
     }).catch(next)
 })
 
 
-router.get('/getproduct',(req,res,next)=>{
+router.patch('/:productid',(req,res,next)=>{
+    Product.updateOne({"_id":req.params.productid.toString()},
+    {$set: 
+        {"pname":        req.body.pname, 
+        "pdescription" : req.body.pdescription, 
+        "category":      req.body.category,
+        "exeUrl":        req.body.exeUrl,
+        "hostUrl":       req.body.hostUrl,
+        "screenShot":    req.body.screenShot,
+        "cost"          :req.body.cost   
+       }
 
-    Product.find({}, function (err, users) {
-        var userMap = {};
-        users.forEach(function (user) {
-            userMap[user._id] = user;
-        });
-        res.send(userMap);
-    });
-   
-})
+}).then(function(user){
+    res.send(user);
+    })
+    
+});
 
+router.delete('/:productid',(req,res,next)=>{
 
-
-
-
-
-// router.patch('/:productid',(req,res,next)=>{
-//   res.status(200).json({
-//     message: "updated json"
-//   })
-// });
-
-// router.delete('/:productid',(req,res,next)=>{
-//     res.status(200).json({
-//       message: "delted json"
-//     })
-//   });
-
-
+  Product.remove({"_id":req.params.productid.toString()}).then(function (user){
+      res.send("sussessfull deleted");
+  }).catch(next);
+});
 module.exports = router;

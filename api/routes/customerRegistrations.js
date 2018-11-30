@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Customer = require('../models/customerRegistration');
 
-router.get('/',(req,res,next)=>{
-    res.status(200).json({
-        message: "handling for products"
-    })
-});
-
 
 router.post('/postcustomer',(req,res,next)=>{
     let userObject = {
@@ -28,35 +22,27 @@ router.post('/postcustomer',(req,res,next)=>{
 })
 
 
-router.get('/getcustomer',(req,res,next)=>{
-
+router.get('/getcustomers',(req,res,next)=>{
+let i=0;
     Customer.find({}, function (err, users) {
-        var userMap = {};
+        var userMap = [];
         users.forEach(function (user) {
-            userMap[user._id] = user;
+            userMap[i] = user;
         });
         res.send(userMap);
     });
 
 })
 
+router.get('/:id',(req,res,next)=>{
 
-
-// router.get('/:productid',(req,res,next)=>{
-//     const id = req.params.productid;
-//     if(id == "special"){
-//         res.status(200).json({
-//             message: "you discovered special id",
-//             id: id
-//         })
-//     }
-//     else{
-//         res.status(200).json({
-//             message: "you passed an id"
-//         })
-//     }   
-// });
-
+    Customer.findById(req.params.id)
+    .then( docs => {
+        if(!docs){ return res.status(404).end()}
+        return res.status(200).json(docs)
+    })
+    .catch(err => next(err));
+})
 
 
 router.patch('/:productid',(req,res,next)=>{

@@ -17,7 +17,6 @@ router.post('/postseller',(req,res,next)=>{
         contact: req.body.contact,
         address: req.body.address,
         password: req.body.password,
-     
     }
     Seller.create(userObject).then(function (user) {
 
@@ -27,17 +26,16 @@ router.post('/postseller',(req,res,next)=>{
 
 })
 
-router.get('/getseller',(req,res,next)=>{
-
+router.get('/getsellers',(req,res,next)=>{
+let i=0;
     Seller.find({}, function (err, users) {
-        var userMap = {};
+        var userMap = [];
         users.forEach(function (user) {
-            userMap[user._id] = user;
+            userMap[i] = user;
         });
         res.send(userMap);
     });
 
 })
-
 
 module.exports = router;

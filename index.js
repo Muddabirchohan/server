@@ -3,6 +3,10 @@ const app = express();
 const registerCustomer = require('./api/routes/customerRegistrations');
 const registerSeller = require('./api/routes/sellerRegistrations');
 const productRoutes = require('./api/routes/products');
+const CustomerBuyRequest = require('./api/routes/customerBuyRequests');
+const CustomerNewRequest = require('./api/routes/customerNewRequest');
+const CustomerCustomizationRequest = require('./api/routes/customerCustomization');
+const CustomerBugRequest = require('./api/routes/customerBugRequest');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
@@ -19,8 +23,13 @@ app.use(bodyparser.urlencoded({ extended: false}));
 app.use(bodyparser.json());
 
 app.use("/customers", registerCustomer);
+app.use("/buyRequest", CustomerBuyRequest);
+app.use("/newRequest", CustomerNewRequest);
+app.use("/customRequest",CustomerCustomizationRequest);
+app.use("/bugRequest", CustomerBugRequest);
 app.use("/sellers",   registerSeller );
 app.use("/products",productRoutes);
+
 
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin","*");

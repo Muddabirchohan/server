@@ -38,4 +38,27 @@ let i=0;
 
 })
 
+router.get('/:id',(req,res,next)=>{
+
+    Seller.findById(req.params.id)
+    .then( docs => {
+        if(!docs){ return res.status(404).end()}
+        return res.status(200).json(docs)
+    })
+    .catch(err => next(err));
+})
+
+router.patch('/:id',(req,res,next)=>{
+  res.status(200).json({
+    message: "updated json"
+  })
+});
+
+router.delete('/:id',(req,res,next)=>{
+    res.status(200).json({
+      message: "delted json"
+    })
+  });
+
+
 module.exports = router;

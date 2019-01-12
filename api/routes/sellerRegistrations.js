@@ -19,7 +19,6 @@ router.post('/postseller',(req,res,next)=>{
         password: req.body.password,
     }
     Seller.create(userObject).then(function (user) {
-
          console.log(user)
         res.send(user)
     }).catch(next)

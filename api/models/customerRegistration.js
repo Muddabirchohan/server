@@ -6,7 +6,7 @@ var fs = require('fs');
 
 const customerSchema = new Schema({
 
-    cname: {
+    name: {
         type: String,
         required: [true, "name fields is required"]
     },

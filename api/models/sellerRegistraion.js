@@ -6,7 +6,7 @@ var fs = require('fs');
 
 const sellerSchema = new Schema({
 
-    sname: {
+    name: {
         type: String,
         required: [true, "name fields is required"]
     },

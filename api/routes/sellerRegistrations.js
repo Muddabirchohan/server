@@ -16,7 +16,7 @@ router.get('/',(req,res,next)=>{
 
 router.post('/postseller',(req,res,next)=>{
     let userObject = {
-        sname: req.body.sname,
+        name: req.body.name,
         email: req.body.email,
         contact: req.body.contact,
         address: req.body.address,

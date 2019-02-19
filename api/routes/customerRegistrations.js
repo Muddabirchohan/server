@@ -6,7 +6,7 @@ const Customer = require('../models/customerRegistration');
 router.post('/postcustomer',(req,res,next)=>{
     let userObject = {
        
-        cname: req.body.cname,
+        name: req.body.name,
         email: req.body.email,
         contact: req.body.contact,
         address: req.body.address,

@@ -1,6 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+    },
+
+})
+
+
+const upload = multer({storage: storage, limits: {
+filesize: 1024*1024*5
+} });
+
 
 router.get('/getproducts',(req,res,next)=>{
 let i=0;
@@ -120,6 +137,17 @@ router.get('/:id',(req,res,next)=>{
     .catch(err => next(err));
 })
 
+
+// router.post('/postproduct',  upload.single('userimage') , function(req,res,next){
+   
+   
+//     User.create(req.body).then(function (user) {
+//         console.log(req.body)
+//         res.send(user)
+//     }).catch(next)
+
+// })
+
 router.post('/postproduct',(req,res,next)=>{
     let userObject = {
        
@@ -131,7 +159,8 @@ router.post('/postproduct',(req,res,next)=>{
         demoVideoUrl: req.body.demoVideoUrl,
         hostUrl: req.body.hostUrl,
         cost: req.body.cost,
-        category: req.body.category
+        category: req.body.category,
+        image: req.body.image
     }
     Product.create(userObject).then(function (user) {
          console.log(user);

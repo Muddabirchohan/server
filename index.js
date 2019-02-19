@@ -10,18 +10,30 @@ const CustomerBugRequest = require('./api/routes/customerBugRequest');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
-
+// const GridFsStorage = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream');
+// const methodoverride = require('method-override');
+const multer = require('multer');
+const upload = multer({ dest : '/uploads/'});
 
 
 
 mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
 mongoose.Promise = global.Promise;
 
+// let gfs;
+// conn.once('open',() => {
+// gfs = Grid(conn.db,mongoose.mongo);
+// gfs.collection('uploads');
+// })
 
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({ extended: false}));
 app.use(bodyparser.json());
+app.use(express.static('uploads'));
+// app.use(methodoverride,'_method');
 
+//routes
 app.use("/customers", registerCustomer);
 app.use("/buyRequest", CustomerBuyRequest);
 app.use("/newRequest", CustomerNewRequest);

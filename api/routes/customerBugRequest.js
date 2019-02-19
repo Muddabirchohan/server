@@ -19,7 +19,6 @@ router.post('/postbug',(req,res,next)=>{
     }).catch(next)
 })
 
-
 router.get('/getbug',(req,res,next)=>{
 let i=0;
 customerBugRequest.find({}, function (err, users) {

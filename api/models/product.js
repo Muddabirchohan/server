@@ -23,7 +23,7 @@ const productSchema = new Schema({
 
     screenShot: {
         type: Array,
-        required: [true, "screenShot fields is required"]
+        // required: [true, "screenShot fields is required"]
     },
     exeUrl: {
         type: String
@@ -41,7 +41,10 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: [true, "category fields is required"]
-    }
+    },
+    image: {
+        type: String,
+      }
     
 })
 

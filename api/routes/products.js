@@ -19,7 +19,7 @@ filesize: 1024*1024*5
 } });
 
 
-router.get('/getproducts',(req,res,next)=>{
+router.get('/getproducts', (req,res,next)=>{
 let i=0;
     Product.find({}, function (err, users) {
         var userMap = [];

@@ -46,7 +46,7 @@ router.get('/:email&:password',(req,res,next)=>{
         Seller.find({}, function (err, users) {
 let flg = false;
             users.forEach(function (user) {
-                if(user.email === req.params.email && user.password === req.params.password  ){
+                if(user.email === req.params.email && user.password === req.params.password){
                     console.log(user)
                     res.send({user,
                     userStatus: 'exist'})

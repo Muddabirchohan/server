@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 // const methodoverride = require('method-override');
 const multer = require('multer');
 const upload = multer({ dest : '/uploads/'});
-
+const cors = require('cors');
 
 
 mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
@@ -46,17 +46,27 @@ app.use("/products",productRoutes);
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin","*");
     res.header(
+        
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept , Authorization"  
     );
     if(req.method === "OPTIONS"){
-        res.header('Access-Control-Allow-Methods',"PUT,POST,PATCH,DELETE,GET");
+        res.header('Access-Control-Allow-Methods',"GET,PUT,POST,PATCH,DELETE");
         return res.status(200).json({});
     }
     next();
 })
 
 // Routes which should handle requests
+
+
+// app.use(cors({
+//     'allowedHeaders': ['sessionId', 'Content-Type'],
+//     'exposedHeaders': ['sessionId'],
+//     'origin': '*',
+//     'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     'preflightContinue': false
+//   }));
 
 app.use((req,res,next)=> {
   const error = new Error('Not Found');

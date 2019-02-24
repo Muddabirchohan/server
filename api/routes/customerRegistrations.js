@@ -4,21 +4,34 @@ const Customer = require('../models/customerRegistration');
 
 
 router.post('/postcustomer',(req,res,next)=>{
-    let userObject = {
-       
-        name: req.body.name,
-        email: req.body.email,
-        contact: req.body.contact,
-        address: req.body.address,
-        password: req.body.password
-    }
-    Customer.create(userObject).then(function (user) {
-        
-         console.log(user);
-        //  userObject.add(user._id);
-        //  console.log(userObject)
-         res.send(user)
-    }).catch(next)
+
+  Customer.find({}, function (err, users) {
+      let flg = false;
+      users.forEach(function (user) {
+          if(user.email === req.body.email){
+              console.log(user)
+              res.send({userStatus: ' exist'})
+              flg =true;
+          }
+      });
+      if(flg==false){
+          let userObject = {
+              name: req.body.name,
+              email: req.body.email,
+              contact: req.body.contact,
+              address: req.body.address,
+              password: req.body.password,
+          }
+          Customer.create(userObject).then(function (user) {
+               console.log(user)
+              res.send({user,
+                  userStatus: "account created"})
+          }).catch(next)
+              
+      }
+  
+  });
+
 })
 
 
@@ -41,14 +54,14 @@ router.post('/getcustomer',(req,res,next)=>{
           if(user.email === req.query.email && user.password === req.query.password){
               console.log(user)
               res.send({user,
-              userStatus: 'exist'})
+              userStatus: ' exist'})
               flg =true;
           }
       });
       if(flg==false){
               res.send({userStatus: " not exist"})
       }
-      // res.send(userMap);
+      
   });
 })
 

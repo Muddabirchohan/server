@@ -6,7 +6,6 @@ const multer = require('multer');
 
 
 
-
 // router.get('/',(req,res,next)=>{
 //     res.status(200).json({
 //         message: "handling for products for seller"
@@ -41,11 +40,11 @@ let i=0;
 })
 
 
-router.post('/getseller',(req,res,next)=>{
+router.get('/:email&:password',(req,res,next)=>{
         Seller.find({}, function (err, users) {
             let flg = false;
             users.forEach(function (user) {
-                if(user.email === req.query.email && user.password === req.query.password){
+                if(user.email === req.params.email && user.password === req.params.password){
                     console.log(user)
                     res.send({user,
                     userStatus: 'exist'})

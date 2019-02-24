@@ -52,6 +52,24 @@ router.post('/getcustomer',(req,res,next)=>{
   });
 })
 
+router.get('/:email&:password',(req,res,next)=>{
+  Customer.find({}, function (err, users) {
+      let flg = false;
+      users.forEach(function (user) {
+          if(user.email === req.params.email && user.password === req.params.password){
+              console.log(user)
+              res.send({user,
+              userStatus: 'exist'})
+              flg =true;
+          }
+      });
+      if(flg==false){
+              res.send({userStatus: " not exist"})
+      }
+      // res.send(userMap);
+  });
+})
+
 router.get('/:id',(req,res,next)=>{
 
     Customer.findById(req.params.id)

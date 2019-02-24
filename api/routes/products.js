@@ -154,13 +154,12 @@ router.post('/postproduct',(req,res,next)=>{
         seller_id: req.body.seller_id,
         pname: req.body.pname,
         pdescription: req.body.pdescription,
-        screenShot: req.body.screenShot,
+        // screenShot: req.body.screenShot,
         exeUrl: req.body.exeUrl,
         demoVideoUrl: req.body.demoVideoUrl,
         hostUrl: req.body.hostUrl,
         cost: req.body.cost,
         category: req.body.category,
-        image: req.body.image
     }
     Product.create(userObject).then(function (user) {
          console.log(user);

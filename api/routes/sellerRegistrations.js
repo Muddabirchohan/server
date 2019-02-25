@@ -61,14 +61,13 @@ router.get('/:email&:password',(req,res,next)=>{
             let flg = false;
             users.forEach(function (user) {
                 if(user.email === req.params.email && user.password === req.params.password){
-                    console.log(user)
                     res.send({user,
-                    userStatus: ' exist'})
+                    userStatus: 'exist'})
                     flg =true;
                 }
             });
             if(flg==false){
-                    res.send({userStatus: " not exist"})
+                    res.send({userStatus: "not exist"})
             }
         
         });

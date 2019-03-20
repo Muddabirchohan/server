@@ -45,7 +45,7 @@ let i =0;
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if(user.category === "web"){
+            if(user.category === "Web App"){
                 userMap[i++] = user
             }
         });
@@ -61,7 +61,7 @@ let i=0;
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if(user.category === "android"){
+            if(user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios App"){
                 userMap[i++] = user
             }
         });
@@ -76,7 +76,7 @@ router.get('/vrar',(req,res,next)=>{
         Product.find({}, function (err, users) {
             var userMap = [];
             users.forEach(function (user) {
-                if(user.category === "vr" || user.category === "ar" ){
+                if(user.category === "VR" || user.category === "AR" ){
                     userMap[i++] = user
                 }
             });
@@ -91,7 +91,7 @@ router.get('/vrar',(req,res,next)=>{
             Product.find({}, function (err, users) {
                 var userMap = [];
                 users.forEach(function (user) {
-                    if(user.category === "ai"){
+                    if(user.category === "AI"){
                         userMap[i++] = user
                     }
                 });
@@ -106,7 +106,7 @@ router.get('/vrar',(req,res,next)=>{
                 Product.find({}, function (err, users) {
                     var userMap = [];
                     users.forEach(function (user) {
-                        if(user.category === "ecommerce"){
+                        if(user.category === "Ecommerce"){
                             userMap[i++] = user
                         }
                     });
@@ -124,7 +124,7 @@ router.get('/vrar',(req,res,next)=>{
                     Product.find({}, function (err, users) {
                         var userMap = [];
                         users.forEach(function (user) {
-                            if(user.category === "iot"){
+                            if(user.category === "IOT"){
                                 userMap[i++] = user
                             }
                         });
@@ -155,6 +155,21 @@ router.get('/:id',(req,res,next)=>{
 //     }).catch(next)
 
 // })
+
+router.post('/getSellerProducts',(req,res,next)=>{
+    let i=0;
+    Product.find({}, function (err,products) {
+        var productMap = [];
+        products.forEach( function (product) { 
+            if( product.seller_id.equals( req.query.seller_id)  ){
+                productMap[i++] = product
+            }
+        });
+        console.log(productMap);
+        res.send(productMap);
+    })
+    .catch(err => next(err));
+})
 
 router.post('/postproduct',(req,res,next)=>{
     let userObject = {

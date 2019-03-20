@@ -5,7 +5,7 @@ var fs = require('fs');
 
 
 const productSchema = new Schema({
-    seller_id: {
+    seller_id:{
         type: Schema.Types.ObjectId,
         ref: 'sellerRegistration',
         required: [true, "product_id fields is required"]

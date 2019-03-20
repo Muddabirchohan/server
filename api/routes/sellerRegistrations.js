@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Seller = require('../models/sellerRegistraion');
+const Seller = require('../models/sellerRegistration');
 const Product = require('../models/product');
 const multer = require('multer');
 

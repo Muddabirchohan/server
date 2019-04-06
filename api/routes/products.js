@@ -134,6 +134,21 @@ router.post('/getSellerProducts', (req, res, next) => {
         .catch(err => next(err));
 })
 
+router.get('/getSellerProducts/:myid',(req,res,next)=>{
+    let i=0;
+    Product.find({}, function (err,products) {
+        var productMap = [];
+        products.forEach( function (product) { 
+            if( product.seller_id.equals(req.params.myid)){
+                productMap[i++] = product
+            }
+        });
+        console.log(productMap);
+        res.send(productMap);
+    })
+    .catch(err => next(err));
+})
+
 router.post('/postproduct', (req, res, next) => {
     let userObject = {
         seller_id: req.body.seller_id,

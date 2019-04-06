@@ -182,6 +182,7 @@ router.post('/postproduct', (req, res, next) => {
         hostUrl: req.body.hostUrl,
         cost: req.body.cost,
         category: req.body.category,
+        screenShotPublicId: req.body.screenShotPublicId
     }
     Product.create(userObject).then(function (user) {
         console.log(user);
@@ -201,7 +202,8 @@ router.patch('/updateProduct', (req, res, next) => {
                 "hostUrl": req.body.hostUrl,
                 "demoVideoUrl": req.body.demoVideoUrl,
                 "screenShot": req.body.screenShot,
-                "cost": req.body.cost
+                "cost": req.body.cost,
+                "screenShotPublicId": req.body.screenShotPublicId
             }
 
         }).then(function (user) {

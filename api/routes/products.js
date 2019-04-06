@@ -39,7 +39,7 @@ router.get('/androidproducts', (req, res, next) => {
         var userMap = [];
         users.forEach(function (user) {
 
-            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios") {
+            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios App") {
                 userMap[i++] = user
             }
         });

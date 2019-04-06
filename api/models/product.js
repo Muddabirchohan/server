@@ -5,7 +5,7 @@ var fs = require('fs');
 
 
 const productSchema = new Schema({
-    seller_id: {
+    seller_id:{
         type: Schema.Types.ObjectId,
         ref: 'sellerRegistration',
         required: [true, "product_id fields is required"]
@@ -41,10 +41,17 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: [true, "category fields is required"]
+
+    },  
+    status: {
+        type: String,
+        required: [true, "status fields is required"]
+    },
+    screenShotPublicId : {
+        type: Array
     }
     
 })
 
 const Product = mongoose.model('product',productSchema);
 module.exports = Product;
-

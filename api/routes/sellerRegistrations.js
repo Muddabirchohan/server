@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Seller = require('../models/sellerRegistration');
+const Seller = require('../models/sellerRegistraion');
 const Product = require('../models/product');
 const multer = require('multer');
-// const Product = require('../models/product');
 
 
 
@@ -21,7 +20,7 @@ router.post('/postseller',(req,res,next)=>{
         users.forEach(function (user) {
             if(user.email === req.body.email){
                 console.log(user)
-                res.send({userStatus: 'exist'})
+                res.send({userStatus: ' exist'})
                 flg =true;
             }
         });
@@ -32,7 +31,6 @@ router.post('/postseller',(req,res,next)=>{
                 contact: req.body.contact,
                 address: req.body.address,
                 password: req.body.password,
-                // image: req.body.image
             }
             Seller.create(userObject).then(function (user) {
                  console.log(user)
@@ -86,18 +84,6 @@ router.get('/:id',(req,res,next)=>{
 })
 
 
-router.get('/:id',(req,res,next)=>{
-
-    Products.findById(req.params.id)
-    .then( docs => {
-        if(!docs){ return res.status(404).end()}
-        return res.status(200).json(docs)
-    })
-    .catch(err => next(err));
-})
-
-
-
 router.get('/products/:sid',(req,res,next)=>{
 
     Product.findById(req.params.sid)
@@ -106,6 +92,7 @@ router.get('/products/:sid',(req,res,next)=>{
         return res.status(200).json(docs)
     })
     .catch(err => next(err));
+  
 })
 
 

@@ -41,11 +41,8 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: [true, "category fields is required"]
-    },  
-    status: {
-        type: String,
-        required: [true, "status fields is required"]
-    },
+    }
+    
 })
 
 const Product = mongoose.model('product',productSchema);

@@ -7,15 +7,14 @@ router.post('/postcustom',(req,res,next)=>{
     let userObject = {
         cusCuzReqId: req.body.cusCuzReqId,
         cuzDescription: req.body.cuzDescription,
-        productId:req.body.productId,
-        category: req.body.category
+        productId:req.body.productId
         // invoice_No: invoiceNum()
     }
     customerCustomizationRequest.create(userObject).then(function (user) {
         
          console.log(user);
         //  userObject.add(user._id);
-         console.log(userObject)
+        //  console.log(userObject)
          res.send(user)
     }).catch(next)
 })

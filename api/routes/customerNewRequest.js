@@ -7,8 +7,7 @@ router.post('/postnew',(req,res,next)=>{
     let userObject = {
         cusNewReqId: req.body.cusNewReqId,
         newSoftwareDescription: req.body.newSoftwareDescription,
-        category:req.body.category,
-        budget: req.body.budget
+        category:req.body.category
         // invoice_No: invoiceNum()
     }
     CustomerNewRequest.create(userObject).then(function (user) {
@@ -21,18 +20,16 @@ router.post('/postnew',(req,res,next)=>{
 })
 
 
-router.get('/getnew/:myid',(req,res,next)=>{
+router.get('/getnew',(req,res,next)=>{
 let i=0;
-CustomerNewRequest.find({}, function (err,request) {
-  var requests = [];
-  request.forEach( function (requ) { 
-      if( requ.cusNewReqId.equals(req.params.myid)){
-        requests[i++] = requ
-      }
-  });
-  console.log(requests);
-  res.send(requests);
-})
+CustomerNewRequest.find({}, function (err, users) {
+        var userMap = [];
+        users.forEach(function (user) {
+            userMap[i] = user;
+        });
+        res.send(userMap);
+    });
+
 })
 
 router.get('/:id',(req,res,next)=>{

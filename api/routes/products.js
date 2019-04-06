@@ -39,7 +39,7 @@ router.get('/androidproducts', (req, res, next) => {
         var userMap = [];
         users.forEach(function (user) {
 
-            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios") {
+            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios App") {
                 userMap[i++] = user
             }
         });
@@ -132,6 +132,21 @@ router.post('/getSellerProducts', (req, res, next) => {
         res.send(productMap);
     })
         .catch(err => next(err));
+})
+
+router.get('/getSellerProducts/:myid',(req,res,next)=>{
+    let i=0;
+    Product.find({}, function (err,products) {
+        var productMap = [];
+        products.forEach( function (product) { 
+            if( product.seller_id.equals(req.params.myid)){
+                productMap[i++] = product
+            }
+        });
+        console.log(productMap);
+        res.send(productMap);
+    })
+    .catch(err => next(err));
 })
 
 router.post('/postproduct', (req, res, next) => {

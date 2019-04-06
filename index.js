@@ -17,8 +17,15 @@ const multer = require('multer');
 const upload = multer({ dest : '/uploads/'});
 const cors = require('cors');
 
+// mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
+// mongoose.connect('mongodb://chohan:chohan123456@ds163940.mlab.com:63940/sbaydb',()=>{
+//     console.log("db connected");
+// })
+// mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
 
-mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
+mongoose.connect('mongodb+srv://muddabir:chohan@cluster0-xrn7i.mongodb.net/test?retryWrites=true',()=>{
+    console.log("db connected");
+})
 mongoose.Promise = global.Promise;
 
 // let gfs;
@@ -30,7 +37,7 @@ mongoose.Promise = global.Promise;
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
@@ -49,7 +56,7 @@ app.use(express.static('uploads'));
 app.use("/customers", registerCustomer);
 app.use("/buyRequest", CustomerBuyRequest);
 app.use("/newRequest", CustomerNewRequest);
-app.use("/customRequest",CustomerCustomizationRequest);
+app.use("/customerRequest",CustomerCustomizationRequest);
 app.use("/bugRequest", CustomerBugRequest);
 app.use("/sellers",   registerSeller );
 app.use("/products",productRoutes);
@@ -104,7 +111,4 @@ app.use((error,req,res,next)=> {
     })
 })
 
-
 module.exports = app;
-
-

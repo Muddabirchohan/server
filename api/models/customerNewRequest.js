@@ -11,6 +11,12 @@ const customerNewRequests = new Schema({
             ref:'customerRegistration',
             required: [true, "cusNewReqId fields is required"]
         },
+        
+        // cusNewReqId: {
+        //     type: String,
+        //     required: [true, "cusNewReqId fields is required"]
+        // },
+        
         newSoftwareDescription:{
             type:String,
             required:[true,"new software description"]
@@ -18,6 +24,9 @@ const customerNewRequests = new Schema({
         category:{
             type:String,
             required:[true,"new product category"]
+        },
+        budget: {
+            type: Number
         }
 
 })

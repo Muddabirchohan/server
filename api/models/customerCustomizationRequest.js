@@ -10,6 +10,12 @@ const customerCustomizationRequests = new Schema({
             ref:'customerRegistration',
             required: [true, "cusCuzReqId fields is required"]
         },
+
+        category: {
+            type:String,
+            required: [true, "customer category is required"]
+        },
+
         productId: {
             type: Schema.Types.ObjectId,
             ref:'product',

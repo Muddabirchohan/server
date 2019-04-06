@@ -27,6 +27,9 @@ const sellerSchema = new Schema({
         type: String,
         required: [true, "address fields is required"]
     },
+    // image: {
+    //     type: String
+    // }
 })
 
 const Seller = mongoose.model('sellers' ,sellerSchema);

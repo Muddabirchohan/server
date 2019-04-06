@@ -57,24 +57,6 @@ let i=0;
     });
 })
 
-router.post('/getseller',(req,res,next)=>{
-    Seller.find({}, function (err, users) {
-        let flg = false;
-        users.forEach(function (user) {
-            if(user.email === req.query.email && user.password === req.query.password){
-                console.log(user)
-                res.send({user,
-                userStatus: ' exist'})
-                flg =true;
-            }
-        });
-        if(flg==false){
-                res.send({userStatus: " not exist"})
-        }
-        
-    });
-  })
-
 
 router.get('/:email&:password',(req,res,next)=>{
         Seller.find({}, function (err, users) {

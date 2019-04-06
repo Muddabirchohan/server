@@ -11,11 +11,11 @@ const customerBuyRequests = new Schema({
             ref:'customerRegistration',
             required: [true, "cus_id fields is required"]
         },
-        Product_Id: {
+        Product_Id:[ {
             type: Schema.Types.ObjectId,
             ref:'product',
             required: [true, "cus_id fields is required"]
-        },
+        } ],
         // invoice_No: {
         //    type: String,
         // }

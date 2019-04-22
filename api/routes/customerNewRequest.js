@@ -20,17 +20,20 @@ router.post('/postnew',(req,res,next)=>{
 })
 
 
-router.get('/getnew',(req,res,next)=>{
-let i=0;
-CustomerNewRequest.find({}, function (err, users) {
-        var userMap = [];
-        users.forEach(function (user) {
-            userMap[i] = user;
-        });
-        res.send(userMap);
+router.get('/getnew/:myid',(req,res,next)=>{
+  let i=0;
+  CustomerNewRequest.find({}, function (err,
+    ) {
+    var requests = [];
+    request.forEach( function (requ) { 
+        if( requ.cusNewReqId.equals(req.params.myid)){
+          requests[i++] = requ
+        }
     });
-
-})
+    console.log(requests);
+    res.send(requests);
+  })
+  })
 
 router.get('/:id',(req,res,next)=>{
 

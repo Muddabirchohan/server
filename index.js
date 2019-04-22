@@ -5,8 +5,9 @@ const registerSeller = require('./api/routes/sellerRegistrations');
 const productRoutes = require('./api/routes/products');
 const CustomerBuyRequest = require('./api/routes/customerBuyRequests');
 const CustomerNewRequest = require('./api/routes/customerNewRequest');
-const CustomerCustomizationRequest = require('./api/routes/customerCustomization');
 const CustomerBugRequest = require('./api/routes/customerBugRequest');
+const CustomerCustomizationRequest = require('./api/routes/customerCustomization');
+const ForgotPassword = require('./api/routes/ForgotPassword');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
@@ -53,7 +54,7 @@ app.use("/customRequest",CustomerCustomizationRequest);
 app.use("/bugRequest", CustomerBugRequest);
 app.use("/sellers",   registerSeller );
 app.use("/products",productRoutes);
-
+// app.use("/forgot",ForgotPassword);
 
 app.use(cors({
     methods: ['GET','POST','PUT','PATCH'],

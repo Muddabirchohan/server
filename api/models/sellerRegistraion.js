@@ -27,7 +27,14 @@ const sellerSchema = new Schema({
         type: String,
         required: [true, "address fields is required"]
     },
-})
+    resetPasswordToken:
+    {
+         type: String,
+        },
+    resetPasswordExpires: {
+        type: Date,
+    }
+    })
 
 const Seller = mongoose.model('sellers' ,sellerSchema);
 module.exports = Seller;

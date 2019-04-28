@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
 
-//require('dotenv').config();
-
 
 router.get('/getproducts', (req, res, next) => {
     let i = 0;
@@ -11,7 +9,9 @@ router.get('/getproducts', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            userMap[i++] = user;
+            if (user.status != "unapproved"){
+                userMap[i++] = user;
+            }
         });
         res.send(userMap);
     });
@@ -23,7 +23,7 @@ router.get('/webproducts', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if (user.category === "Web App") {
+            if (user.category === "Web App" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -39,7 +39,7 @@ router.get('/androidproducts', (req, res, next) => {
         var userMap = [];
         users.forEach(function (user) {
 
-            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios App") {
+            if (user.category === "Android App" || user.category === "Ios App" || user.category === "Android/Ios App" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -54,7 +54,7 @@ router.get('/vrar', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if (user.category === "VR" || user.category === "AR") {
+            if (user.category === "VR" || user.category === "AR" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -69,7 +69,7 @@ router.get('/ai', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if (user.category === "AI") {
+            if (user.category === "AI" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -84,7 +84,7 @@ router.get('/ecommerce', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if (user.category === "Ecommerce") {
+            if (user.category === "Ecommerce" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -99,7 +99,7 @@ router.get('/iot', (req, res, next) => {
     Product.find({}, function (err, users) {
         var userMap = [];
         users.forEach(function (user) {
-            if (user.category === "IOT") {
+            if (user.category === "IOT" && user.status != "unapproved") {
                 userMap[i++] = user
             }
         });
@@ -202,6 +202,7 @@ router.patch('/:productid', (req, res, next) => {
                 "category": req.body.category,
                 "exeUrl": req.body.exeUrl,
                 "hostUrl": req.body.hostUrl,
+                "demoVideoUrl": req.body.demoVideoUrl,
                 "screenShot": req.body.screenShot,
                 "cost": req.body.cost
             }

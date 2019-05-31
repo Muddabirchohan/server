@@ -2,10 +2,11 @@
   "name": "nodefyp",
   "version": "1.0.0",
   "description": "sbay",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"    
   },
   "author": "chohan",
   "license": "ISC",
@@ -28,5 +29,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
-  }
+  },
+  "engines": {
+    "node": "v12.0.0"
+}
 }

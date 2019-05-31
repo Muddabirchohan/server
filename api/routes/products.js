@@ -15,7 +15,6 @@ router.get('/getproducts', (req, res, next) => {
         });
         res.send(userMap);
     });
-
 })
 
 router.get('/webproducts', (req, res, next) => {

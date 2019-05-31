@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require("dotenv").config();
 const path = require("path");
-
+const port = process.env.PORT || 8000;
 
 mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
 mongoose.Promise = global.Promise;

@@ -4,7 +4,7 @@
   "description": "sbay",
   "main": "index.js",
   "scripts": {
-    "start": "npm server.js",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"    
   },
   "author": "chohan",

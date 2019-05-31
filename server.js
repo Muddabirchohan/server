@@ -16,7 +16,7 @@ require("dotenv").config();
 const path = require("path");
 const port = process.env.PORT || 8000;
 
-mongoose.connect('mongodb://localhost/sbay' ,{ useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/sbay' ,{ useMongoClient: true });
 mongoose.Promise = global.Promise;
 
 // let gfs;

@@ -44,7 +44,6 @@ var allowCrossDomain = function(req, res, next) {
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({ extended: false}));
 app.use(bodyparser.json());
-app.use(express.static('uploads'));
 // app.use(methodoverride,'_method');
 
 //routes
@@ -90,22 +89,22 @@ app.use((req,res,next)=>{
 //     'preflightContinue': false
 //   }));
 
-app.use((req,res,next)=> {
-  const error = new Error('Not Found');
-  error.status = 404;
-  next(error)
-})
+// app.use((req,res,next)=> {
+//   const error = new Error('Not Found');
+//   error.status = 404;
+//   next(error)
+// })
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/sbay' ,{ useMongoClient: true });
-mongoose.Promise = global.Promise;
-app.use((error,req,res,next)=> {
-    res.status(error.status || 8000);
-    res.json({
-        error: {
-        message: error.message
-        }
-    })
-})
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/sbay' ,{ useMongoClient: true });
+// mongoose.Promise = global.Promise;
+// app.use((error,req,res,next)=> {
+//     res.status(error.status || 8000);
+//     res.json({
+//         error: {
+//         message: error.message
+//         }
+//     })
+// })
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
